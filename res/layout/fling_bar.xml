@@ -50,7 +50,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="0"
-                android:src="@drawable/ic_eos_fling" />
+                android:src="@drawable/aosip_fling" />
 
             <View
                 android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="0"
-                android:src="@drawable/ic_eos_fling_land" />
+                android:src="@drawable/aosip_fling_land" />
 
             <View
                 android:layout_width="match_parent"
