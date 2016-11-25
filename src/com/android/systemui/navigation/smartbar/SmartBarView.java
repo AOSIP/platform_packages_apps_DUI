@@ -327,7 +327,7 @@ public class SmartBarView extends BaseNavigationBar {
                 button.setImageDrawable(d);
             }
             if (mNavTintSwitch) {
-            button.setColorFilter(mIcontint, Mode.SRC_IN);
+            button.setColorFilter(mIcontint, Mode.MULTIPLY);
             } else {
             button.setColorFilter(null);
             }
@@ -335,12 +335,12 @@ public class SmartBarView extends BaseNavigationBar {
     }
     
     public static int updatetint() {
-    if (mNavTintSwitch) {
-	return mIcontint; 
-    } else {
-	mIcontint = -1 ;
-	return mIcontint; 
-	 }
+      if (mNavTintSwitch) {
+	      return mIcontint; 
+      } else {
+	      mIcontint = -1 ;
+	      return mIcontint; 
+	  }
     } 
 
     @Override
