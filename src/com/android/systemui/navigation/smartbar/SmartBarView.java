@@ -41,6 +41,8 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.os.PowerManager;
+import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -174,6 +176,8 @@ public class SmartBarView extends BaseNavigationBar {
                 mAudioManager.getStreamVolume(streamType) == 0);
     }
 
+    private GestureDetector mNavDoubleTapToSleep;
+
     public SmartBarView(Context context, boolean asDefault) {
         super(context);
         mBarTransitions = new SmartBarTransitions(this);
@@ -205,12 +209,27 @@ public class SmartBarView extends BaseNavigationBar {
             }
         };
         mMediaMonitor.setListening(true);
+
+        mNavDoubleTapToSleep = new GestureDetector(context,
+                new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+                if (pm != null) {
+                    pm.goToSleep(SystemClock.uptimeMillis());
+                }
+                return true;
+            }
+        });
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (isOneHandedModeEnabled) {
             mSlideTouchEvent.handleTouchEvent(event);
+        if (Settings.System.getIntForUser(mContext.getContentResolver(),
+                    Settings.System.SMARTBAR_DOUBLETAP_SLEEP, 1, UserHandle.USER_CURRENT) == 1) {
+            mNavDoubleTapToSleep.onTouchEvent(event);
         }
         return super.onTouchEvent(event);
     }
