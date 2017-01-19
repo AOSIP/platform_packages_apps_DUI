@@ -41,6 +41,7 @@ import android.os.Handler;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -226,7 +227,7 @@ public class SmartBarView extends BaseNavigationBar {
     public boolean onTouchEvent(MotionEvent event) {
         if (isOneHandedModeEnabled) {
             mSlideTouchEvent.handleTouchEvent(event);
-        if (isNavDoubleTapEnabled) {
+        } if (isNavDoubleTapEnabled) {
             mNavDoubleTapToSleep.onTouchEvent(event);
         }
         return super.onTouchEvent(event);
